@@ -111,7 +111,7 @@ Each task maps to one GitHub issue.
   - Verify: `./scripts/verify-examples.sh modules/17-standard-library-tour` exits 0; no example depends on the current wall-clock time for its assertions.
   - Files: `modules/17-standard-library-tour/**`, `solutions/17-standard-library-tour/**`
 
-- [ ] **T19 — Module 18 concurrency-basics** · [#19](https://github.com/aliturgutbozkurt/Java-27-edu/issues/19)
+- [x] **T19 — Module 18 concurrency-basics** · [#19](https://github.com/aliturgutbozkurt/Java-27-edu/issues/19)
   - Acceptance: Threads, a demonstrable race condition, `synchronized`, atomics, `ExecutorService`, and the memory-visibility problem stated plainly.
   - Verify: `./scripts/verify-examples.sh modules/18-concurrency-basics` exits 0; examples are deterministic enough not to flake, or state their nondeterminism and still exit 0.
   - Files: `modules/18-concurrency-basics/**`, `solutions/18-concurrency-basics/**`
