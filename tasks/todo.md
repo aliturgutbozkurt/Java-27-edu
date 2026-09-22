@@ -77,7 +77,7 @@ Each task maps to one GitHub issue.
   - Verify: `./scripts/verify-examples.sh modules/11-generics` exits 0.
   - Files: `modules/11-generics/**`, `solutions/11-generics/**`
 
-- [ ] **T13 — Module 12 collections** · [#13](https://github.com/aliturgutbozkurt/Java-27-edu/issues/13)
+- [x] **T13 — Module 12 collections** · [#13](https://github.com/aliturgutbozkurt/Java-27-edu/issues/13)
   - Acceptance: `List`, `Set`, `Map`, `Deque`, sequenced collections, choosing the right implementation, the equals/hashCode contract applied to hash-based collections, and immutable factory methods.
   - Verify: `./scripts/verify-examples.sh modules/12-collections` exits 0.
   - Files: `modules/12-collections/**`, `solutions/12-collections/**`
