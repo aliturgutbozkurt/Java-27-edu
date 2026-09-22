@@ -106,7 +106,7 @@ Each task maps to one GitHub issue.
   - Verify: `./scripts/verify-examples.sh modules/16-files-and-io` exits 0; examples clean up any files they create.
   - Files: `modules/16-files-and-io/**`, `solutions/16-files-and-io/**`
 
-- [ ] **T18 — Module 17 standard-library-tour** · [#18](https://github.com/aliturgutbozkurt/Java-27-edu/issues/18)
+- [x] **T18 — Module 17 standard-library-tour** · [#18](https://github.com/aliturgutbozkurt/Java-27-edu/issues/18)
   - Acceptance: String methods and formatting, `java.time` in depth enough to avoid the classic date bugs, `Math`, random number generation, and comparators.
   - Verify: `./scripts/verify-examples.sh modules/17-standard-library-tour` exits 0; no example depends on the current wall-clock time for its assertions.
   - Files: `modules/17-standard-library-tour/**`, `solutions/17-standard-library-tour/**`
