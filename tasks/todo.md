@@ -10,7 +10,7 @@ Each task maps to one GitHub issue.
 
 ## scaffold
 
-- [ ] **T01 — Repository scaffolding and verification script** · [#1](https://github.com/aliturgutbozkurt/Java-27-edu/issues/1)
+- [x] **T01 — Repository scaffolding and verification script** · [#1](https://github.com/aliturgutbozkurt/Java-27-edu/issues/1)
   - Acceptance: `scripts/verify-examples.sh` walks `modules/**/examples/*.java` and `solutions/**/*.java`, runs each with JDK 27, honours the `// EXPECT: compile-error` and `// EXPECT: preview` headers, fails on any unexpected non-zero exit, and refuses to run if `java -version` is not 27. Root `README.md` stub states the JDK requirement and how to run an example. `.gitignore` excludes `*.class` and editor cruft.
   - Verify: `./scripts/verify-examples.sh` exits 0 on the empty tree; planting a deliberately broken `.java` file makes it exit non-zero with a readable message; removing it restores exit 0.
   - Files: `scripts/verify-examples.sh`, `README.md`, `.gitignore`
