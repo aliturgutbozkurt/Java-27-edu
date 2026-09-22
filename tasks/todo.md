@@ -40,7 +40,7 @@ Each task maps to one GitHub issue.
   - Verify: `./scripts/verify-examples.sh modules/04-methods` exits 0.
   - Files: `modules/04-methods/**`, `solutions/04-methods/**`
 
-- [ ] **T06 — Module 05 classes-and-objects** · [#6](https://github.com/aliturgutbozkurt/Java-27-edu/issues/6)
+- [x] **T06 — Module 05 classes-and-objects** · [#6](https://github.com/aliturgutbozkurt/Java-27-edu/issues/6)
   - Acceptance: Classes, fields, constructors, `this`, encapsulation, static members, flexible constructor bodies (JEP 513, final in 25). Graduates the learner from compact source files to the classic `public class` plus `public static void main(String[] args)` and explains why every real codebase uses it.
   - Verify: `./scripts/verify-examples.sh modules/05-classes-and-objects` exits 0.
   - Files: `modules/05-classes-and-objects/**`, `solutions/05-classes-and-objects/**`
