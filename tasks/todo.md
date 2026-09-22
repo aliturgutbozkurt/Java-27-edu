@@ -35,7 +35,7 @@ Each task maps to one GitHub issue.
   - Verify: `./scripts/verify-examples.sh modules/03-control-flow` exits 0.
   - Files: `modules/03-control-flow/**`, `solutions/03-control-flow/**`
 
-- [ ] **T05 — Module 04 methods** · [#5](https://github.com/aliturgutbozkurt/Java-27-edu/issues/5)
+- [x] **T05 — Module 04 methods** · [#5](https://github.com/aliturgutbozkurt/Java-27-edu/issues/5)
   - Acceptance: Declaration, overloading and its resolution rules, varargs, static vs. instance, and an explicit treatment of Java being pass-by-value including for references, which is the single most misunderstood point for newcomers.
   - Verify: `./scripts/verify-examples.sh modules/04-methods` exits 0.
   - Files: `modules/04-methods/**`, `solutions/04-methods/**`
