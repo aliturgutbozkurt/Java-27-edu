@@ -121,7 +121,7 @@ Each task maps to one GitHub issue.
   - Verify: `./scripts/verify-examples.sh modules/19-virtual-threads` exits 0.
   - Files: `modules/19-virtual-threads/**`, `solutions/19-virtual-threads/**`
 
-- [ ] **T21 — Module 20 packages-and-modules** · [#21](https://github.com/aliturgutbozkurt/Java-27-edu/issues/21)
+- [x] **T21 — Module 20 packages-and-modules** · [#21](https://github.com/aliturgutbozkurt/Java-27-edu/issues/21)
   - Acceptance: Packages, classpath, the module system at a practical level, module import declarations (JEP 511, final in 25), plus `jar` and `javadoc` usage.
   - Verify: `./scripts/verify-examples.sh modules/20-packages-and-modules` exits 0; any multi-file example documents its exact compile command.
   - Files: `modules/20-packages-and-modules/**`, `solutions/20-packages-and-modules/**`
