@@ -55,7 +55,7 @@ Each task maps to one GitHub issue.
   - Verify: `./scripts/verify-examples.sh modules/07-interfaces` exits 0.
   - Files: `modules/07-interfaces/**`, `solutions/07-interfaces/**`
 
-- [ ] **T09 — Module 08 records-and-enums** · [#9](https://github.com/aliturgutbozkurt/Java-27-edu/issues/9)
+- [x] **T09 — Module 08 records-and-enums** · [#9](https://github.com/aliturgutbozkurt/Java-27-edu/issues/9)
   - Acceptance: Records, compact constructors, what records generate for you, enums carrying behaviour and state, and a decision guide for class vs. record vs. enum.
   - Verify: `./scripts/verify-examples.sh modules/08-records-and-enums` exits 0.
   - Files: `modules/08-records-and-enums/**`, `solutions/08-records-and-enums/**`
