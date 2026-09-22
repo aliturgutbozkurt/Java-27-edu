@@ -60,7 +60,7 @@ Each task maps to one GitHub issue.
   - Verify: `./scripts/verify-examples.sh modules/08-records-and-enums` exits 0.
   - Files: `modules/08-records-and-enums/**`, `solutions/08-records-and-enums/**`
 
-- [ ] **T10 — Module 09 sealed-and-pattern-matching** · [#10](https://github.com/aliturgutbozkurt/Java-27-edu/issues/10)
+- [x] **T10 — Module 09 sealed-and-pattern-matching** · [#10](https://github.com/aliturgutbozkurt/Java-27-edu/issues/10)
   - Acceptance: Sealed types, `instanceof` patterns, switch pattern matching, record patterns, and exhaustiveness checking. Depends on records from Module 08.
   - Verify: `./scripts/verify-examples.sh modules/09-sealed-and-pattern-matching` exits 0.
   - Files: `modules/09-sealed-and-pattern-matching/**`, `solutions/09-sealed-and-pattern-matching/**`
