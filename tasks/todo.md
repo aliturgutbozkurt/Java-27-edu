@@ -45,7 +45,7 @@ Each task maps to one GitHub issue.
   - Verify: `./scripts/verify-examples.sh modules/05-classes-and-objects` exits 0.
   - Files: `modules/05-classes-and-objects/**`, `solutions/05-classes-and-objects/**`
 
-- [ ] **T07 — Module 06 inheritance-and-polymorphism** · [#7](https://github.com/aliturgutbozkurt/Java-27-edu/issues/7)
+- [x] **T07 — Module 06 inheritance-and-polymorphism** · [#7](https://github.com/aliturgutbozkurt/Java-27-edu/issues/7)
   - Acceptance: `extends`, `super`, `@Override`, `abstract`, `final`, dynamic dispatch, and the `equals`/`hashCode`/`toString` contract with a worked example of getting it wrong.
   - Verify: `./scripts/verify-examples.sh modules/06-inheritance-and-polymorphism` exits 0.
   - Files: `modules/06-inheritance-and-polymorphism/**`, `solutions/06-inheritance-and-polymorphism/**`
