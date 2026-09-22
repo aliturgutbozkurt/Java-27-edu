@@ -101,7 +101,7 @@ Each task maps to one GitHub issue.
 
 ## platform
 
-- [ ] **T17 — Module 16 files-and-io** · [#17](https://github.com/aliturgutbozkurt/Java-27-edu/issues/17)
+- [x] **T17 — Module 16 files-and-io** · [#17](https://github.com/aliturgutbozkurt/Java-27-edu/issues/17)
   - Acceptance: `Path` and `Files`, reading and writing text, streaming large files, try-with-resources applied for real, and why the legacy `File` API is avoided.
   - Verify: `./scripts/verify-examples.sh modules/16-files-and-io` exits 0; examples clean up any files they create.
   - Files: `modules/16-files-and-io/**`, `solutions/16-files-and-io/**`
