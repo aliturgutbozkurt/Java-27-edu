@@ -126,7 +126,7 @@ Each task maps to one GitHub issue.
   - Verify: `./scripts/verify-examples.sh modules/20-packages-and-modules` exits 0; any multi-file example documents its exact compile command.
   - Files: `modules/20-packages-and-modules/**`, `solutions/20-packages-and-modules/**`
 
-- [ ] **T22 — Module 21 testing-your-code** · [#22](https://github.com/aliturgutbozkurt/Java-27-edu/issues/22)
+- [x] **T22 — Module 21 testing-your-code** · [#22](https://github.com/aliturgutbozkurt/Java-27-edu/issues/22)
   - Acceptance: `assert` with `-ea`, a hand-rolled micro test harness kept under 50 lines, what a real JUnit setup adds and why projects adopt it. Zero third-party dependencies, per the spec boundary.
   - Verify: `./scripts/verify-examples.sh modules/21-testing-your-code` exits 0; harness demonstrates both a passing and a failing assertion without failing the overall run.
   - Files: `modules/21-testing-your-code/**`, `solutions/21-testing-your-code/**`

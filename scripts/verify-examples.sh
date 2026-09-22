@@ -17,6 +17,7 @@
 #   // EXPECT: preview        run with --enable-preview --source 27; must exit 0
 #   // EXPECT: compile-only   must compile; not run (helpers, multi-file setups)
 #   // EXPECT: runtime-error  must compile, then FAIL at runtime (teaching a crash)
+#   // EXPECT: assertions     run with -ea so `assert` is live; must exit 0
 #
 set -uo pipefail
 
@@ -146,6 +147,21 @@ check_file() {
       fi
       ;;
 
+    assertions)
+      # Assertions are disabled by default, so an example teaching `assert`
+      # would silently do nothing under plain `java <file>`. This marker turns
+      # them on, which is the only way such an example proves anything.
+      output="$(with_timeout java -ea "$file" 2>&1)"
+      rc=$?
+      if [ $rc -eq 0 ]; then
+        report_pass "$rel" "ran with -ea"
+      elif [ $rc -eq 124 ] || [ $rc -eq 137 ]; then
+        report_fail "$rel" "Timed out after ${RUN_TIMEOUT}s." "$output"
+      else
+        report_fail "$rel" "Exited ${rc} while running with -ea." "$output"
+      fi
+      ;;
+
     preview)
       output="$(with_timeout java --enable-preview --source "$REQUIRED_JDK" "$file" 2>&1)"
       rc=$?
@@ -171,7 +187,7 @@ check_file() {
       ;;
 
     *)
-      report_fail "$rel" "Unknown marker '// EXPECT: ${marker}'. Valid: compile-error, compile-only, runtime-error, preview." ""
+      report_fail "$rel" "Unknown marker '// EXPECT: ${marker}'. Valid: compile-error, compile-only, runtime-error, assertions, preview." ""
       ;;
   esac
 
