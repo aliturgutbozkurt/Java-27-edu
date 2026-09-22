@@ -133,7 +133,7 @@ Each task maps to one GitHub issue.
 
 ## release-literacy
 
-- [ ] **T23 — Module 22 whats-new** · [#23](https://github.com/aliturgutbozkurt/Java-27-edu/issues/23)
+- [x] **T23 — Module 22 whats-new** · [#23](https://github.com/aliturgutbozkurt/Java-27-edu/issues/23)
   - Acceptance: What JDK 26 and 27 actually changed, sourced from openjdk.org rather than memory. LTS vs. non-LTS and why 25 matters more than 27 for production. How to read a JEP. Preview and incubator features explained, with structured concurrency (JEP 533, seventh preview) and primitive patterns (JEP 532, fifth preview) demonstrated behind `--enable-preview`, each labelled with its JEP number and preview round.
   - Verify: `./scripts/verify-examples.sh modules/22-whats-new` exits 0 including the preview-flagged examples; every version claim in the README carries a link to its openjdk.org source.
   - Files: `modules/22-whats-new/**`, `solutions/22-whats-new/**`
