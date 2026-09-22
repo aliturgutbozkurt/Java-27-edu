@@ -94,7 +94,7 @@ Each task maps to one GitHub issue.
   - Verify: `./scripts/verify-examples.sh modules/14-streams` exits 0.
   - Files: `modules/14-streams/**`, `solutions/14-streams/**`
 
-- [ ] **T16 — Module 15 optional** · [#16](https://github.com/aliturgutbozkurt/Java-27-edu/issues/16)
+- [x] **T16 — Module 15 optional** · [#16](https://github.com/aliturgutbozkurt/Java-27-edu/issues/16)
   - Acceptance: `Optional` as a return type, the idiomatic operations, and the anti-patterns that make it worse than plain null such as calling `get` unguarded or using it as a field.
   - Verify: `./scripts/verify-examples.sh modules/15-optional` exits 0.
   - Files: `modules/15-optional/**`, `solutions/15-optional/**`
