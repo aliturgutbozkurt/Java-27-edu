@@ -89,7 +89,7 @@ Each task maps to one GitHub issue.
   - Verify: `./scripts/verify-examples.sh modules/13-lambdas` exits 0.
   - Files: `modules/13-lambdas/**`, `solutions/13-lambdas/**`
 
-- [ ] **T15 — Module 14 streams** · [#15](https://github.com/aliturgutbozkurt/Java-27-edu/issues/15)
+- [x] **T15 — Module 14 streams** · [#15](https://github.com/aliturgutbozkurt/Java-27-edu/issues/15)
   - Acceptance: Pipeline anatomy, intermediate vs. terminal operations, laziness, collectors, gatherers, and an honest treatment of when parallel streams help and when they hurt. Depends on Module 13.
   - Verify: `./scripts/verify-examples.sh modules/14-streams` exits 0.
   - Files: `modules/14-streams/**`, `solutions/14-streams/**`
