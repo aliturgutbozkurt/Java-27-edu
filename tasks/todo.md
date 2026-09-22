@@ -25,12 +25,12 @@ Each task maps to one GitHub issue.
 
 ## core-language
 
-- [ ] **T03 — Module 02 variables-and-types** · [#3](https://github.com/aliturgutbozkurt/Java-27-edu/issues/3)
+- [x] **T03 — Module 02 variables-and-types** · [#3](https://github.com/aliturgutbozkurt/Java-27-edu/issues/3)
   - Acceptance: Primitives vs. references, `var` and where it helps or hurts, autoboxing traps including the Integer cache, String immutability, text blocks. Coming-from-another-language section contrasts Python/JS dynamic typing.
   - Verify: `./scripts/verify-examples.sh modules/02-variables-and-types` exits 0.
   - Files: `modules/02-variables-and-types/**`, `solutions/02-variables-and-types/**`
 
-- [ ] **T04 — Module 03 control-flow** · [#4](https://github.com/aliturgutbozkurt/Java-27-edu/issues/4)
+- [x] **T04 — Module 03 control-flow** · [#4](https://github.com/aliturgutbozkurt/Java-27-edu/issues/4)
   - Acceptance: Operators, `if`/`else`, switch expressions with arrow form and `yield`, all loop forms, enhanced `for`, labelled break. Contrasts switch expressions against the old fall-through statement form.
   - Verify: `./scripts/verify-examples.sh modules/03-control-flow` exits 0.
   - Files: `modules/03-control-flow/**`, `solutions/03-control-flow/**`
