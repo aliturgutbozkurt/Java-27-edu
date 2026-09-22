@@ -72,7 +72,7 @@ Each task maps to one GitHub issue.
 
 ## type-system
 
-- [ ] **T12 — Module 11 generics** · [#12](https://github.com/aliturgutbozkurt/Java-27-edu/issues/12)
+- [x] **T12 — Module 11 generics** · [#12](https://github.com/aliturgutbozkurt/Java-27-edu/issues/12)
   - Acceptance: Generic classes and methods, bounded types, wildcards with PECS, type erasure and the concrete limitations it imposes.
   - Verify: `./scripts/verify-examples.sh modules/11-generics` exits 0.
   - Files: `modules/11-generics/**`, `solutions/11-generics/**`
