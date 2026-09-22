@@ -50,7 +50,7 @@ Each task maps to one GitHub issue.
   - Verify: `./scripts/verify-examples.sh modules/06-inheritance-and-polymorphism` exits 0.
   - Files: `modules/06-inheritance-and-polymorphism/**`, `solutions/06-inheritance-and-polymorphism/**`
 
-- [ ] **T08 — Module 07 interfaces** · [#8](https://github.com/aliturgutbozkurt/Java-27-edu/issues/8)
+- [x] **T08 — Module 07 interfaces** · [#8](https://github.com/aliturgutbozkurt/Java-27-edu/issues/8)
   - Acceptance: Interfaces vs. abstract classes, default/static/private methods, functional interfaces introduced as a concept ahead of Module 13, and why Java favours composition here.
   - Verify: `./scripts/verify-examples.sh modules/07-interfaces` exits 0.
   - Files: `modules/07-interfaces/**`, `solutions/07-interfaces/**`
