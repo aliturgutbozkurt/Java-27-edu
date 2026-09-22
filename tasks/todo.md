@@ -116,7 +116,7 @@ Each task maps to one GitHub issue.
   - Verify: `./scripts/verify-examples.sh modules/18-concurrency-basics` exits 0; examples are deterministic enough not to flake, or state their nondeterminism and still exit 0.
   - Files: `modules/18-concurrency-basics/**`, `solutions/18-concurrency-basics/**`
 
-- [ ] **T20 — Module 19 virtual-threads** · [#20](https://github.com/aliturgutbozkurt/Java-27-edu/issues/20)
+- [x] **T20 — Module 19 virtual-threads** · [#20](https://github.com/aliturgutbozkurt/Java-27-edu/issues/20)
   - Acceptance: Virtual threads (final in 21), why blocking became cheap again, scoped values (JEP 506, final in 25), pinning pitfalls, and a benchmark example contrasting platform and virtual threads.
   - Verify: `./scripts/verify-examples.sh modules/19-virtual-threads` exits 0.
   - Files: `modules/19-virtual-threads/**`, `solutions/19-virtual-threads/**`
