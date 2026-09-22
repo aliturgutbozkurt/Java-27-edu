@@ -16,6 +16,7 @@
 #   // EXPECT: compile-error  must FAIL to compile (teaching a compile error)
 #   // EXPECT: preview        run with --enable-preview --source 27; must exit 0
 #   // EXPECT: compile-only   must compile; not run (helpers, multi-file setups)
+#   // EXPECT: runtime-error  must compile, then FAIL at runtime (teaching a crash)
 #
 set -uo pipefail
 
@@ -128,6 +129,23 @@ check_file() {
       fi
       ;;
 
+    runtime-error)
+      output="$(with_timeout java "$file" 2>&1)"
+      rc=$?
+      if [ $rc -eq 124 ] || [ $rc -eq 137 ]; then
+        report_fail "$rel" "Timed out after ${RUN_TIMEOUT}s rather than failing." "$output"
+      elif [ $rc -ne 0 ]; then
+        # Distinguish a compile failure from the runtime crash we asked for.
+        if printf '%s' "$output" | grep -q 'error: compilation failed'; then
+          report_fail "$rel" "Declared '// EXPECT: runtime-error' but it failed to COMPILE. Use compile-error instead." "$output"
+        else
+          report_pass "$rel" "crashed at runtime, as intended"
+        fi
+      else
+        report_fail "$rel" "Declared '// EXPECT: runtime-error' but it exited 0." ""
+      fi
+      ;;
+
     preview)
       output="$(with_timeout java --enable-preview --source "$REQUIRED_JDK" "$file" 2>&1)"
       rc=$?
@@ -153,7 +171,7 @@ check_file() {
       ;;
 
     *)
-      report_fail "$rel" "Unknown marker '// EXPECT: ${marker}'. Valid: compile-error, compile-only, preview." ""
+      report_fail "$rel" "Unknown marker '// EXPECT: ${marker}'. Valid: compile-error, compile-only, runtime-error, preview." ""
       ;;
   esac
 

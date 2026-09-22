@@ -94,6 +94,7 @@ Examples can declare what they expect in their first ten lines:
 | `// EXPECT: compile-error` | Must **fail** to compile; it is teaching a compile error |
 | `// EXPECT: preview` | Run with `--enable-preview --source 27` |
 | `// EXPECT: compile-only` | Must compile; not run on its own |
+| `// EXPECT: runtime-error` | Must compile, then **crash** at runtime; it is teaching a failure |
 
 ---
 

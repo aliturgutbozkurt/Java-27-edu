@@ -17,7 +17,7 @@ Each task maps to one GitHub issue.
 
 ## template
 
-- [ ] **T02 — Module 01 getting-started, the reference implementation** · [#2](https://github.com/aliturgutbozkurt/Java-27-edu/issues/2)
+- [x] **T02 — Module 01 getting-started, the reference implementation** · [#2](https://github.com/aliturgutbozkurt/Java-27-edu/issues/2)
   - Acceptance: Covers JDK 27 setup, the JVM/JRE/JDK distinction, compact source files (JEP 512, final in 25), `IO.println`, and what compiling actually does. README has all seven template sections. At least two runnable examples. Homework brief with acceptance criteria. Reference solution under `solutions/01-getting-started/`. This module's structure is the template every later module copies.
   - Verify: `./scripts/verify-examples.sh modules/01-getting-started` exits 0; solution runs clean; README section headings match the spec template exactly.
   - Files: `modules/01-getting-started/README.md`, `modules/01-getting-started/examples/*.java`, `modules/01-getting-started/homework/README.md`, `solutions/01-getting-started/Solution.java`
