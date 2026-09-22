@@ -84,7 +84,7 @@ Each task maps to one GitHub issue.
 
 ## functional
 
-- [ ] **T14 — Module 13 lambdas** · [#14](https://github.com/aliturgutbozkurt/Java-27-edu/issues/14)
+- [x] **T14 — Module 13 lambdas** · [#14](https://github.com/aliturgutbozkurt/Java-27-edu/issues/14)
   - Acceptance: Lambda syntax, method references in all four forms, the standard functional interfaces, and variable capture including the effectively-final rule.
   - Verify: `./scripts/verify-examples.sh modules/13-lambdas` exits 0.
   - Files: `modules/13-lambdas/**`, `solutions/13-lambdas/**`
