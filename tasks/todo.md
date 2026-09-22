@@ -65,7 +65,7 @@ Each task maps to one GitHub issue.
   - Verify: `./scripts/verify-examples.sh modules/09-sealed-and-pattern-matching` exits 0.
   - Files: `modules/09-sealed-and-pattern-matching/**`, `solutions/09-sealed-and-pattern-matching/**`
 
-- [ ] **T11 — Module 10 exceptions** · [#11](https://github.com/aliturgutbozkurt/Java-27-edu/issues/11)
+- [x] **T11 — Module 10 exceptions** · [#11](https://github.com/aliturgutbozkurt/Java-27-edu/issues/11)
   - Acceptance: Checked vs. unchecked and why Java is alone in this, try/catch/finally, try-with-resources, custom exceptions, and an explicit list of anti-patterns such as swallowing exceptions.
   - Verify: `./scripts/verify-examples.sh modules/10-exceptions` exits 0.
   - Files: `modules/10-exceptions/**`, `solutions/10-exceptions/**`
