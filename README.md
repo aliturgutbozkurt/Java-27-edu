@@ -11,6 +11,10 @@ Every example in this repository has been run on JDK 27. Every compiler error
 quoted in a lesson was produced by actually compiling the broken code, and every
 number was measured rather than recalled.
 
+> **Türkçe:** the whole curriculum is also available in Turkish under
+> [`tr/`](tr/README.md). Code, commands and compiler output stay in English
+> there; [`tr/CEVIRI-NOTLARI.md`](tr/CEVIRI-NOTLARI.md) explains why.
+
 ---
 
 ## What "Java 27" means here
@@ -187,13 +191,16 @@ Every lesson and homework is also available as a PDF, plus the whole curriculum
 as a single 209-page book.
 
 ```bash
-./scripts/build-pdfs.sh          # all 49 PDFs
-./scripts/build-pdfs.sh --book   # just the combined book
+./scripts/build-pdfs.sh          # both languages, 99 PDFs
+./scripts/build-pdfs.sh --en     # English only  -> pdf/
+./scripts/build-pdfs.sh --tr     # Turkish only  -> pdf-tr/
+./scripts/build-pdfs.sh --book   # just the combined books
 ```
 
 | Output | What |
 |---|---|
 | `pdf/Java-27-Curriculum.pdf` | the complete book, with a table of contents |
+| `pdf-tr/Java-27-Mufredat.pdf` | the same book in Turkish |
 | `pdf/NN-<module>.pdf` | one lesson |
 | `pdf/NN-<module>-homework.pdf` | one homework |
 | `pdf/00-overview.pdf`, `00-spec.pdf`, `00-plan.pdf`, `00-tasks.pdf` | this file and the project documents |
