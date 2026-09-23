@@ -49,11 +49,11 @@ Aynı tip, aynı çağrı biçimi, zıt sonuçlar:
 
 ```java
 void mutateTheObject(List<String> items) {
-    items.add("added inside the method");   // paylaşılan nesneyi değiştirir
+    items.add("added inside the method");   // changes the shared object
 }
 
 void reassignTheParameter(List<String> items) {
-    items = new ArrayList<>();              // yalnızca yerel kopyayı yeniden bağlar
+    items = new ArrayList<>();              // rebinds the local copy only
 }
 ```
 

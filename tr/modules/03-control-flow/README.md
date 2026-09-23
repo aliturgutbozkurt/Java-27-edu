@@ -34,8 +34,8 @@ listenin ne anlama geldiğine sizin adınıza karar vermez.
 
 ```java
 String name = "";
-if (name) { }   // derlenmez
-if (0) { }      // derlenmez
+if (name) { }   // does not compile
+if (0) { }      // does not compile
 ```
 
 Karşılaştırmayı açıkça yazarsınız:
@@ -175,7 +175,7 @@ search:
 for (int row = 0; row < grid.length; row++) {
     for (int col = 0; col < grid[row].length; col++) {
         if (grid[row][col] == target) {
-            break search;   // her iki döngüden de çıkar
+            break search;   // leaves both loops
         }
     }
 }
@@ -214,8 +214,8 @@ kullanın ve sorun ortaya çıkamaz.
 
 ```java
 byte b = 10;
-b += 300;          // derlenir, 54 yazdırır
-b = b + 300;       // derlenmez
+b += 300;          // compiles, prints 54
+b = b + 300;       // does not compile
 ```
 
 `+=` sessizce bir dönüşüm ekler. `10 + 300` sonucu `310`, ve bunu byte'a kesmek

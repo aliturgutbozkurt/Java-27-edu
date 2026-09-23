@@ -96,8 +96,8 @@ bir uyarıyla derlenir ve sonra başarısız olur:
 
 ```java
 List<String> words = new ArrayList<>();
-List raw = words;     // ham tip, geriye dönük uyumluluk için yasal
-raw.add(42);          // unchecked uyarısı, izin verildi
+List raw = words;     // raw type, legal for backward compatibility
+raw.add(42);          // unchecked warning, allowed
 ```
 
 ```
@@ -128,10 +128,10 @@ bir `List<Number>` değildir. Joker karakterler olmadan eleman tipi başına bir
 aşırı yükleme gerekirdi.
 
 ```java
-// ÜRETİCİ: listeden okur, dolayısıyla Number'ın herhangi bir alt tipi uyar
+// PRODUCER: reads from the list, so any subtype of Number will do
 static double sum(List<? extends Number> numbers)
 
-// TÜKETİCİ: listeye yazar, dolayısıyla Integer'ın herhangi bir üst tipi uyar
+// CONSUMER: writes into the list, so any supertype of Integer will do
 static void addAll(List<? super Integer> destination, List<Integer> source)
 ```
 
@@ -153,8 +153,8 @@ Diziler öteki cevabı seçti.
 dosyasından:
 
 ```java
-Object[] array = new String[2];   // derlenir: diziler değişkendir
-array[0] = 42;                    // çalışma zamanında fırlatır
+Object[] array = new String[2];   // compiles: arrays are covariant
+array[0] = 42;                    // throws at runtime
 ```
 
 ```

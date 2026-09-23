@@ -1,6 +1,7 @@
 # Spec: Java 27 Learning Curriculum
 
-**Status:** Delivered — all 24 tasks complete, verified 2026-09-23
+**Status:** Delivered, then amended — see *Amendment 1* below
+**Original scope:** all 24 tasks complete, verified 2026-09-23
 **Date:** 2026-09-23
 **Phase:** 1 (Specify) of Specify → Plan → Tasks → Implement
 
@@ -274,15 +275,24 @@ records how it was verified, not merely that it was.
       All 22 links confirmed present by script. Setup documented for macOS,
       Linux and Windows, with `JAVA_HOME` instructions for each.
 
-- [x] **6. No file contains non-English prose, identifiers, or comments.**
-      Checked by scanning every `.java`, `.md` and `.sh` file for non-ASCII
-      letter characters. None found.
+- [~] **6. No file contains non-English prose, identifiers, or comments.**
+      **Superseded by Amendment 1.** True for the English curriculum and for all
+      code, which is what the criterion was protecting. No longer true of the
+      repository as a whole, because `tr/` now holds a Turkish translation of
+      every lesson. Replaced by criteria 9 through 12.
 
 - [x] **7. No third-party dependency appears anywhere in the repository.**
       No `pom.xml`, `build.gradle` or `.jar` exists. Every import across all 130
       files resolves to `java.*`, `javax.*` or `jdk.*`, plus the JEP 511
       `import module java.base` declaration, which is a language feature rather
       than a dependency.
+
+      **Amendment 1 note.** `scripts/build-pdfs.sh` requires pandoc and a
+      Chromium-based browser. These are external *tools* invoked to render
+      documentation, not libraries the curriculum's code links against. Nothing
+      a learner compiles or runs depends on them, and the PDFs are optional
+      output. The criterion stands as written for the Java code, and this note
+      exists so the distinction is stated rather than assumed.
 
 - [x] **8. Every factual claim about a JDK version traces to openjdk.org
       release data.**
@@ -330,3 +340,84 @@ that surfaced several that were wrong:
 - The structured concurrency preview history was written from recollection as
   seven rounds. Reading JEP 533's History section showed two earlier incubator
   rounds, making it nine releases.
+
+---
+
+## Amendment 1 — PDF output and a Turkish translation
+
+**Date:** 2026-09-23, after the original 24 tasks were delivered.
+
+Two capabilities were added after the spec was signed off, and neither appeared
+in any spec or task list at the time it was built. The
+`spec-driven-development` skill names that exact situation as a red flag:
+*"Implementing features not mentioned in any spec or task list."* This amendment
+brings the document back in line with what was actually delivered.
+
+### What was added
+
+| Capability | What it is |
+|---|---|
+| **PDF output** | `scripts/build-pdfs.sh` renders every Markdown file to PDF, plus one combined book per language. `scripts/pdf.css` styles them for print. |
+| **Bilingual content** | `tr/` holds a Turkish translation of all 48 Markdown files, plus `tr/CEVIRI-NOTLARI.md` recording the translation rules. |
+
+### What the translation deliberately does not translate
+
+Recorded here because it is a constraint, not a preference, and the original
+spec's Boundaries section had no rule covering a second language:
+
+- **Code blocks stay verbatim English.** They quote the real files under
+  `examples/`, so translating their comments would break the correspondence with
+  what the learner actually runs.
+- **Compiler output stays verbatim.** A translated error message is unsearchable
+  and does not match what the terminal prints.
+- **Commands, file paths, Java API names and JEP numbers stay as-is.**
+- **No Java source lives under `tr/`.** Both languages share the same
+  `modules/*/examples/` and `solutions/` trees.
+
+### A violation this amendment caught
+
+Stating the rule above forced a check against it, and the check failed.
+**Thirty-five Java code blocks across eighteen Turkish files had their comments
+translated**, in direct violation of the convention the translation itself
+documents. They were restored to their English originals, and criterion 10 now
+guards against a recurrence.
+
+This is the value of writing the constraint down rather than holding it in mind:
+the rule was clear, it was written, and it was still broken forty-five times
+before anything checked.
+
+### Amended success criteria
+
+Criteria 1 through 5, 7 and 8 stand unchanged. Criterion 6 is superseded.
+
+- [x] **9. Every English Markdown file has a Turkish counterpart at the same
+      path under `tr/`.** All 48 confirmed by script.
+
+- [x] **10. No `java` code block in any Turkish file contains non-English
+      text.** Zero violations, after 35 were found and restored.
+
+- [x] **11. Java code blocks align one-to-one between the two languages.**
+      Every one of the 44 paired files has an identical count, so a reader can
+      follow either version against the same code.
+
+- [x] **12. No Java source file exists under `tr/`.** Zero. Both languages share
+      one set of examples and solutions, so the verification script covers both.
+
+- [x] **13. `scripts/build-pdfs.sh` produces both languages.** 49 English PDFs
+      in `pdf/`, 50 Turkish in `pdf-tr/`, each with a combined book, in about
+      100 seconds.
+
+- [x] **14. The translation does not affect example verification.**
+      `./scripts/verify-examples.sh` still reports all 130 files behaving as
+      declared.
+
+### Process note
+
+The correct order would have been to amend this spec **before** building either
+capability, then re-derive the plan and tasks from it. That did not happen: both
+were built directly on request and the spec was left stale, with criterion 6
+reading `[x]` while it was false.
+
+Writing the amendment is what surfaced the code-block violation, which had
+otherwise shipped. The lesson is the one this curriculum's Module 21 makes about
+tests: a rule nobody checks is a rule that is already broken.

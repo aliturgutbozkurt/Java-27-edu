@@ -38,8 +38,8 @@ olan tekniğin kendisi olması.
 dosyasından:
 
 ```java
-"  x  ".strip()                     // Unicode farkındalıklı; trim() değil
-"a,b,c".split(",")                  // bir sabit değil, DÜZENLİ İFADE alır
+"  x  ".strip()                     // Unicode-aware; trim() is not
+"a,b,c".split(",")                  // takes a REGEX, not a literal
 String.join("-", "2026", "09")
 "ab".repeat(3)
 "%-10s|%8.2f|%,d".formatted("name", 3.14159, 1_234_567)

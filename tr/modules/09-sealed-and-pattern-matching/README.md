@@ -84,7 +84,7 @@ dosyasından:
 case String s when s.isEmpty() -> "an empty string";
 case String s -> "text of length " + s.length();
 
-// eski
+// old
 if (o instanceof String) {
     String s = (String) o;
     return s.isEmpty() ? "an empty string" : "text of length " + s.length();
@@ -119,7 +119,7 @@ geri kalanında kapsamdadır:
 if (!(o instanceof String s)) {
     return -1;
 }
-return s.length();   // s burada kapsamda
+return s.length();   // s is in scope here
 ```
 
 ### Record desenleri

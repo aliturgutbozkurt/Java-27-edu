@@ -78,9 +78,9 @@ dosyasından:
 
 ```java
 interface Collection {
-    List<String> tracks();                            // uygulanmak zorunda
+    List<String> tracks();                       // must implement
 
-    default int count() { return tracks().size(); }   // bedava
+    default int count() { return tracks().size(); }   // free
     default boolean isEmpty() { return count() == 0; }
 }
 ```

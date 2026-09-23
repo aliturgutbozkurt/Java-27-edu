@@ -36,8 +36,8 @@ değil.
 İki imzayı karşılaştırın:
 
 ```java
-User findUser(int id)              // null döndürebilir. Öğrenmek için kaynağı okuyun.
-Optional<User> findUser(int id)    // tipte söylüyor.
+User findUser(int id)              // might return null. Read the source to find out.
+Optional<User> findUser(int id)    // says so, in the type.
 ```
 
 Tüm değer önerisi budur. **Çağıranın yükümlülüğünün görünür olmasıyla** ilgilidir,
@@ -57,7 +57,7 @@ dosyasından:
 ```java
 findUser(1).map(User::email).orElse("no email")
 findUser(1).filter(u -> u.name().startsWith("a")).map(User::name).orElse("no match")
-findUser(9).or(() -> findUser(1))          // alternatif bir Optional, dolayısıyla zincirlenir
+findUser(9).or(() -> findUser(1))          // an alternative Optional, so it chains
 ```
 
 `ifPresentOrElse` iki dallı durumu ele alır. `Optional.stream()` sıfır ya da bir

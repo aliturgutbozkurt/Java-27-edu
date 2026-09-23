@@ -51,7 +51,7 @@ Savunma, normalleştirip nereye indiğinizi denetlemektir:
 
 ```java
 Path attempted = uploads.resolve(userSupplied).normalize();
-attempted.startsWith(uploads)   // ../../etc/passwd için false
+attempted.startsWith(uploads)   // false for ../../etc/passwd
 ```
 
 **`String.startsWith` değil `Path.startsWith` kullanın.** Karakterler yerine ad
@@ -74,8 +74,8 @@ bağları çözen ve dosya yoksa fırlatan metot `toRealPath()`.
 dosyasından:
 
 ```java
-Files.writeString(path, "content");                                  // oluştur ya da kes
-Files.writeString(path, "more\n", StandardOpenOption.APPEND);        // sona ekle
+Files.writeString(path, "content");                                  // create or truncate
+Files.writeString(path, "more\n", StandardOpenOption.APPEND);        // append
 String whole = Files.readString(path);
 List<String> lines = Files.readAllLines(path);
 ```

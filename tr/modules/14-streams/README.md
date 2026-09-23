@@ -34,10 +34,10 @@ Java stream'i, bir kez kullanıldığında buharlaşan bir boru hattı verir.
 ### Anatomi
 
 ```java
-words.stream()                    // KAYNAK
-     .filter(w -> w.length() > 4) // ARA İŞLEM, tembel
-     .map(String::toUpperCase)    // ARA İŞLEM, tembel
-     .toList();                   // TERMİNAL, her şeyi çalıştırır
+words.stream()                    // SOURCE
+     .filter(w -> w.length() > 4) // INTERMEDIATE, lazy
+     .map(String::toUpperCase)    // INTERMEDIATE, lazy
+     .toList();                   // TERMINAL, runs everything
 ```
 
 Ara işlemler bir stream döndürür ve hiçbir şey yapmaz. Boru hattını gerçekte
@@ -99,7 +99,7 @@ STAFF.stream().collect(Collectors.groupingBy(Employee::department))
 ```java
 groupingBy(Employee::department, Collectors.counting())
 groupingBy(Employee::department, Collectors.averagingInt(Employee::salary))
-groupingBy(Employee::department, TreeMap::new, Collectors.counting())   // sıralı
+groupingBy(Employee::department, TreeMap::new, Collectors.counting())   // ordered
 ```
 
 Harita fabrikası olmadan sırası tanımsız olan bir `HashMap` alırsınız. Modül 12
@@ -173,7 +173,7 @@ parçacığı diziyi yeniden boyutlandırırken bir diğeri yazmanın ortasında
 **Çözüm kilit değil, `collect`:**
 
 ```java
-IntStream.range(0, 100_000).parallel().boxed().toList();   // her zaman 100000
+IntStream.range(0, 100_000).parallel().boxed().toList();   // 100000, always
 ```
 
 Her iş parçacığı kendi kabına biriktirir ve sonuçlar sonunda birleştirilir,

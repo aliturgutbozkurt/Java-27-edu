@@ -51,9 +51,9 @@ dosyasına bakın:
 
 ```java
 int[] original = {1, 2, 3};
-int[] alias = original;   // referansı kopyalar, diziyi değil
+int[] alias = original;   // copies the reference, not the array
 alias[0] = 999;
-// original[0] artık 999
+// original[0] is now 999
 ```
 
 İlkel tipi kopyalamak değeri kopyalar. Referansı kopyalamak etiketi kopyalar ve
@@ -145,8 +145,8 @@ dosyasından:
 
 ```java
 String name = "ada";
-name.toUpperCase();          // "ADA" hesaplar ve atar
-name = name.toUpperCase();   // sonucu saklamak zorundasınız
+name.toUpperCase();          // computes "ADA" and throws it away
+name = name.toUpperCase();   // you have to keep the result
 ```
 
 İlk satır insanların gerçekten yaptığı bir hatadır ve hiçbir şey sizi uyarmaz.
@@ -200,15 +200,15 @@ var scores = new HashMap<String, List<Integer>>();
 Sağ taraf ne aldığınızı söylemiyorsa zarar verir:
 
 ```java
-var result = service.process(input);   // şimdi gidip process() metoduna bakın
+var result = service.process(input);   // now go look up process()
 ```
 
 Yapamadığı üç şey, hepsi derleme hatası:
 
 ```java
-var a;            // çıkarılacak bir şey yok
-var b = null;     // null her referans tipine ait
-var c = () -> 1;  // lambda bir hedef tipe ihtiyaç duyar
+var a;            // nothing to infer from
+var b = null;     // null belongs to every reference type
+var c = () -> 1;  // a lambda needs a target type
 ```
 
 [`VarCannotInferNull.java`](../../../modules/02-variables-and-types/examples/VarCannotInferNull.java)
@@ -251,7 +251,7 @@ olarak tutup kontrol edin.
 **Sıcak döngü içinde kutulama.**
 
 ```java
-Long sum = 0L;                                  // bir milyon tahsis
+Long sum = 0L;                                  // a million allocations
 for (long i = 0; i < 1_000_000; i++) sum += i;
 ```
 

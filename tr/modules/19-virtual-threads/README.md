@@ -145,9 +145,9 @@ değil.
 private static final ScopedValue<String> CURRENT_USER = ScopedValue.newInstance();
 
 ScopedValue.where(CURRENT_USER, "ada").run(() -> {
-    handleRequest();          // CURRENT_USER.get() her derinlikte çalışır
+    handleRequest();          // CURRENT_USER.get() works at any depth
 });
-// bağlama burada yok, gövde fırlatmış olsa bile
+// binding is gone here, including if the body threw
 ```
 
 Unutulacak bir `remove()` yok. Bağlama tam olarak `run()` süresince yaşar.

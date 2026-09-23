@@ -94,8 +94,8 @@ satır bazında yuvarlamayı gerektirir ve bu da yine farklı bir toplam verir.
 `String.format` dolgu ve sıfırla doldurmayı anlar:
 
 ```java
-String.format("%-12s %8s", name, amount)   // 12'ye sola, 8'e sağa yasla
-String.format("%d.%02d", whole, remainder) // %02d iki basamağı zorlar
+String.format("%-12s %8s", name, amount)   // left-align 12, right-align 8
+String.format("%d.%02d", whole, remainder) // %02d forces two digits
 ```
 
 İkincisi, daha önce bulduğunuz hatanın çözümü.

@@ -144,3 +144,20 @@ Each task maps to one GitHub issue.
   - Acceptance: Root `README.md` links all 22 modules in order with a one-line description each, documents JDK 27 setup per platform, and explains how to use the solutions tree. All eight spec success criteria checked off explicitly.
   - Verify: `./scripts/verify-examples.sh` exits 0 across the whole repository; every module folder confirmed to contain README, examples, and homework; no non-English content found; no third-party dependency anywhere.
   - Files: `README.md`, `SPEC.md` (success criteria checklist)
+
+## amendment-1 — post-delivery scope
+
+- [x] **A01 — Amend the spec for PDF output and the Turkish translation**
+  - Acceptance: SPEC.md records both capabilities, supersedes criterion 6 rather
+    than leaving it falsely checked, states the build-tooling distinction for
+    criterion 7, and adds criteria 9 through 14 with how each was verified.
+  - Verify: 13 criteria pass, 1 superseded; every new criterion measured by
+    script rather than asserted.
+  - Files: `SPEC.md`, `tr/SPEC.md`, `tasks/todo.md`
+
+- [x] **A02 — Restore English code blocks in the Turkish translation**
+  - Acceptance: no `java` code block under `tr/` contains non-English text, and
+    block counts align one-to-one with the English source.
+  - Verify: 35 violations found across 18 files and restored; re-scan reports
+    zero. Turkish PDFs rebuilt.
+  - Files: 18 files under `tr/modules/`

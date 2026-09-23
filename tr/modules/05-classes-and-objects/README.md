@@ -185,7 +185,7 @@ sizden geçmeden değiştirebilir. Modül 04'ün ödevi çözümü kapsıyordu.
 
 ```java
 private final List<String> items = new ArrayList<>();
-items.add("still allowed");   // sorun yok, referans hiç değişmedi
+items.add("still allowed");   // fine, the reference never changed
 ```
 
 `final` referansı sabitler, nesneyi değil.

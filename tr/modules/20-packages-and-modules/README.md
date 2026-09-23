@@ -151,8 +151,8 @@ Bir **modül** bir bildirim ekler:
 
 ```java
 module com.example.tool {
-    requires java.logging;      // neye ihtiyacı var
-    exports com.example.tool;   // başkaları neyi kullanabilir
+    requires java.logging;      // what it needs
+    exports com.example.tool;   // what others may use
 }
 ```
 

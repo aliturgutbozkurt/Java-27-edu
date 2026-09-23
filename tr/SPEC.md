@@ -1,6 +1,7 @@
 # Spesifikasyon: Java 27 Öğrenim Müfredatı
 
-**Durum:** Teslim edildi — 24 görevin hepsi tamam, 2026-09-23'te doğrulandı
+**Durum:** Teslim edildi, sonra eklendi — aşağıdaki *Ek 1* bölümüne bakın
+**Özgün kapsam:** 24 görevin hepsi tamam, 2026-09-23'te doğrulandı
 **Tarih:** 2026-09-23
 **Aşama:** Specify → Plan → Tasks → Implement dizisinin 1. aşaması (Specify)
 
@@ -216,14 +217,23 @@ yalnızca sağlandığını değil, **nasıl doğrulandığını** kaydediyor.
       belgeliyor.** 22 bağlantının hepsi script ile doğrulandı. Kurulum macOS,
       Linux ve Windows için, her biri `JAVA_HOME` talimatıyla belgelendi.
 
-- [x] **6. Hiçbir dosya İngilizce olmayan metin, tanımlayıcı ya da yorum
-      içermiyor.** Her `.java`, `.md` ve `.sh` dosyası ASCII dışı harf karakterleri
-      için tarandı. Hiçbiri bulunmadı.
+- [~] **6. Hiçbir dosya İngilizce olmayan metin, tanımlayıcı ya da yorum
+      içermiyor.** **Ek 1 ile geçersiz kılındı.** İngilizce müfredat ve tüm kod
+      için doğru, ki kriterin koruduğu şey buydu. Depo bütünü için artık doğru
+      değil, çünkü `tr/` altında her dersin Türkçe çevirisi duruyor. Yerine 9 ile
+      12 arası kriterler geçti.
 
 - [x] **7. Depoda hiçbir yerde üçüncü parti bağımlılık yok.** `pom.xml`,
       `build.gradle` ya da `.jar` yok. 130 dosyadaki her import `java.*`, `javax.*`
       ya da `jdk.*` altında çözülüyor, artı bir bağımlılık değil dil özelliği olan
       JEP 511 `import module java.base` bildirimi.
+
+      **Ek 1 notu.** `scripts/build-pdfs.sh`, pandoc ve Chromium tabanlı bir
+      tarayıcı gerektiriyor. Bunlar dokümantasyon üretmek için çağrılan dış
+      *araçlar*, müfredatın kodunun bağlandığı kütüphaneler değil. Öğrencinin
+      derlediği ya da çalıştırdığı hiçbir şey onlara bağlı değil, ve PDF'ler
+      isteğe bağlı çıktı. Kriter Java kodu için yazıldığı gibi geçerli, ve bu not
+      ayrımın varsayılmak yerine belirtilmesi için var.
 
 - [x] **8. Bir JDK sürümü hakkındaki her olgusal iddia openjdk.org yayın
       verisine dayanıyor.** Modül ve kök README'lerde 32 ayrı openjdk.org
@@ -273,3 +283,86 @@ bağlı kalmak yanlış olan birkaç şeyi açığa çıkardı:
 - Yapılandırılmış eşzamanlılık preview geçmişi hafızadan yedi tur olarak
   yazılmıştı. JEP 533'ün History bölümünü okumak, öncesinde iki inkübatör turu
   daha olduğunu gösterdi, yani dokuz sürüm.
+
+---
+
+## Ek 1 — PDF çıktısı ve Türkçe çeviri
+
+**Tarih:** 2026-09-23, özgün 24 görev teslim edildikten sonra.
+
+Spesifikasyon onaylandıktan sonra iki yetenek eklendi, ve hiçbiri inşa edildiği
+sırada herhangi bir spesifikasyonda ya da görev listesinde yer almıyordu.
+`spec-driven-development` becerisi tam olarak bu durumu bir kırmızı bayrak olarak
+isimlendiriyor: *"Hiçbir spesifikasyonda ya da görev listesinde geçmeyen
+özellikleri uygulamak."* Bu ek, dokümanı gerçekte teslim edilenle yeniden
+hizalıyor.
+
+### Eklenen ne
+
+| Yetenek | Ne olduğu |
+|---|---|
+| **PDF çıktısı** | `scripts/build-pdfs.sh` her Markdown dosyasını PDF'e, artı dil başına birleşik bir kitaba dönüştürüyor. `scripts/pdf.css` onları baskı için biçimlendiriyor. |
+| **İki dilli içerik** | `tr/` altında 48 Markdown dosyasının tamamının Türkçe çevirisi, artı çeviri kurallarını kaydeden `tr/CEVIRI-NOTLARI.md`. |
+
+### Çevirinin bilerek çevirmediği
+
+Burada kaydedildi çünkü bu bir tercih değil bir kısıt, ve özgün spesifikasyonun
+Sınırlar bölümünde ikinci bir dili kapsayan hiçbir kural yoktu:
+
+- **Kod blokları aynen İngilizce kalır.** `examples/` altındaki gerçek dosyaları
+  alıntılıyorlar, dolayısıyla yorumlarını çevirmek öğrencinin gerçekten
+  çalıştırdığı şeyle örtüşmeyi bozardı.
+- **Derleyici çıktısı aynen kalır.** Çevrilmiş bir hata mesajı aratılamaz ve
+  terminalde yazılanla eşleşmez.
+- **Komutlar, dosya yolları, Java API adları ve JEP numaraları olduğu gibi kalır.**
+- **`tr/` altında hiç Java kaynağı yok.** Her iki dil aynı
+  `modules/*/examples/` ve `solutions/` ağaçlarını paylaşıyor.
+
+### Bu ekin yakaladığı bir ihlal
+
+Yukarıdaki kuralı yazmak onu denetlemeyi zorunlu kıldı, ve denetim başarısız
+oldu. **On sekiz Türkçe dosyadaki otuz beş Java kod bloğunun yorumları
+çevrilmişti**, ki bu çevirinin kendi belgelediği kuralın doğrudan ihlali.
+İngilizce özgünlerine geri alındılar, ve 10 numaralı kriter artık tekrarına karşı
+koruyor.
+
+Kuralı akılda tutmak yerine yazmanın değeri bu: kural açıktı, yazılmıştı, ve
+herhangi bir şey denetlemeden önce yine de kırk beş kez çiğnendi.
+
+### Güncellenmiş başarı kriterleri
+
+1 ile 5 arası, 7 ve 8 numaralı kriterler değişmeden geçerli. 6 numaralı kriter
+geçersiz kılındı.
+
+- [x] **9. Her İngilizce Markdown dosyasının `tr/` altında aynı yolda bir Türkçe
+      karşılığı var.** 48'inin hepsi script ile doğrulandı.
+
+- [x] **10. Hiçbir Türkçe dosyadaki hiçbir `java` kod bloğu İngilizce olmayan
+      metin içermiyor.** 35 tanesi bulunup geri alındıktan sonra sıfır ihlal.
+
+- [x] **11. Java kod blokları iki dil arasında birebir hizalı.** Eşleşen 44
+      dosyanın her birinde sayı aynı, dolayısıyla okuyucu her iki sürümü de aynı
+      koda karşı takip edebiliyor.
+
+- [x] **12. `tr/` altında hiç Java kaynak dosyası yok.** Sıfır. Her iki dil tek
+      bir örnek ve çözüm kümesini paylaşıyor, dolayısıyla doğrulama scripti
+      ikisini birden kapsıyor.
+
+- [x] **13. `scripts/build-pdfs.sh` her iki dili de üretiyor.** `pdf/` altında 49
+      İngilizce PDF, `pdf-tr/` altında 50 Türkçe, her birinde birleşik bir kitap,
+      yaklaşık 100 saniyede.
+
+- [x] **14. Çeviri örnek doğrulamasını etkilemiyor.**
+      `./scripts/verify-examples.sh` hâlâ 130 dosyanın bildirdiği gibi
+      davrandığını raporluyor.
+
+### Süreç notu
+
+Doğru sıra, her iki yeteneği de inşa etmeden **önce** bu spesifikasyonu
+güncellemek, sonra plan ve görevleri ondan türetmek olurdu. Bu olmadı: ikisi de
+doğrudan istek üzerine inşa edildi ve spesifikasyon bayat kaldı, 6 numaralı
+kriter yanlış olduğu hâlde `[x]` olarak duruyordu.
+
+Eki yazmak, aksi hâlde yayımlanmış olacak kod bloğu ihlalini açığa çıkaran şey
+oldu. Ders, bu müfredatın Modül 21'inin testler hakkında söylediğiyle aynı:
+kimsenin denetlemediği bir kural zaten çiğnenmiş bir kuraldır.

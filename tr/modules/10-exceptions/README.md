@@ -123,7 +123,7 @@ try {
     r = open();
     use(r);
 } finally {
-    if (r != null) r.close();   // bu fırlatırsa gerçek istisnanın YERİNE GEÇER
+    if (r != null) r.close();   // if this throws, it REPLACES the real exception
 }
 ```
 

@@ -79,7 +79,7 @@ Bir record ek metotlar, statik fabrikalar ve arayüzler içerebilir. İçeremeye
 şey **ek örnek durumudur**:
 
 ```java
-record Bad(int x) { private int cached; }   // derlenmez
+record Bad(int x) { private int cached; }   // does not compile
 ```
 
 Bu kısıt garantinin kendisidir. Bir record *bileşenlerinin ta kendisidir*,

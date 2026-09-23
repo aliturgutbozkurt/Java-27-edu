@@ -64,8 +64,8 @@ Hemen öğrenmeye değer üç `Map` metodu:
 
 ```java
 map.getOrDefault(key, 0)
-map.computeIfAbsent(key, k -> new ArrayList<>()).add(value)   // liste haritası
-map.merge(word, 1, Integer::sum)                              // sayma
+map.computeIfAbsent(key, k -> new ArrayList<>()).add(value)   // map of lists
+map.merge(word, 1, Integer::sum)                              // counting
 ```
 
 ### Sıralı koleksiyonlar
@@ -162,14 +162,14 @@ istisnanın fırlatılmasına dayanan kod yazmayın.
 Dört doğru alternatif:
 
 ```java
-numbers.removeIf(n -> n % 2 == 0);        // 1. genellikle bu
+numbers.removeIf(n -> n % 2 == 0);        // 1. usually this
 
-var it = numbers.iterator();               // 2. koşul yetmediğinde
+var it = numbers.iterator();               // 2. when a predicate is not enough
 while (it.hasNext()) {
     if (it.next() % 2 == 0) it.remove();
 }
-                                           // 3. topla, sonra sil
-                                           // 4. yeni koleksiyon kur (Modül 14)
+                                           // 3. collect, then remove after
+                                           // 4. build a new collection (Module 14)
 ```
 
 ### Anahtarlar hakkındaki kural

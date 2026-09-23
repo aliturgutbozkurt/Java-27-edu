@@ -36,11 +36,11 @@ bir hedef arayüze ihtiyaç duyar, ve yakalanan bir yerel **yeniden atanamaz**.
 [`Lambdas.java`](../../../modules/13-lambdas/examples/Lambdas.java) dosyasından:
 
 ```java
-Greeter named = new PoliteGreeter();                  // isimli sınıf
-Greeter anonymous = new Greeter() {                   // anonim sınıf
+Greeter named = new PoliteGreeter();                  // a named class
+Greeter anonymous = new Greeter() {                   // an anonymous class
     @Override public String greet(String n) { return "Good day, " + n; }
 };
-Greeter lambda = name -> "Good day, " + name;         // lambda
+Greeter lambda = name -> "Good day, " + name;         // a lambda
 ```
 
 Üçü de `Greeter` uygulayan bir nesne üretir. Lambda; arayüz adını, metot adını,
@@ -50,11 +50,11 @@ niteleyicileri ve parametre tipini atlar, çünkü derleyici hepsini hedef tipte
 Sözdizimi biçimleri:
 
 ```java
-() -> doSomething()                 // parametresiz, parantez zorunlu
-name -> "hello " + name             // tek parametre, parantez isteğe bağlı
-(String name) -> ...                // çıkarım yetmediğinde açık tip
-name -> { ...; return x; }          // blok gövde süslü parantez ve return ister
-(a, b) -> a + b                     // iki parametre her zaman parantez ister
+() -> doSomething()                 // no parameters, parentheses required
+name -> "hello " + name             // one parameter, parentheses optional
+(String name) -> ...                // explicit type when inference needs help
+name -> { ...; return x; }          // block body needs braces and return
+(a, b) -> a + b                     // two parameters always need parentheses
 ```
 
 **Fonksiyonel arayüzün tam olarak bir soyut metodu vardır.** Varsayılan ve statik
@@ -121,14 +121,14 @@ değeri görür mü, ve iki iş parçacığı aynı anda atarsa ne olur?
 
 ```java
 List<String> items = new ArrayList<>();
-Runnable r = () -> items.add("x");      // değişken hiç değişmiyor
+Runnable r = () -> items.add("x");      // the variable never changes
 ```
 
 İnsanların kuralı aşmak için kullandığı boşluk da bu:
 
 ```java
 int[] counter = {0};
-list.forEach(x -> counter[0]++);        // derlenir, ve kötü kokar
+list.forEach(x -> counter[0]++);        // compiles, and is a smell
 ```
 
 Derlenir çünkü değişken hiç değişmez. Kötü kokar çünkü lambda mutasyon için
