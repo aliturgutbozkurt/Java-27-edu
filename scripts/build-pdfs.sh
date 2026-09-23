@@ -11,13 +11,14 @@
 # code blocks in these lessons correctly without one.
 #
 # Usage:
-#   ./scripts/build-pdfs.sh            # everything
-#   ./scripts/build-pdfs.sh --book     # only the combined book
+#   ./scripts/build-pdfs.sh            # both languages
+#   ./scripts/build-pdfs.sh --en       # English only    -> pdf/
+#   ./scripts/build-pdfs.sh --tr       # Turkish only    -> pdf-tr/
+#   ./scripts/build-pdfs.sh --book     # only the combined book(s)
 #
 set -uo pipefail
 
 REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-OUT_DIR="$REPO_ROOT/pdf"
 CSS="$REPO_ROOT/scripts/pdf.css"
 WORK="$(mktemp -d)"
 trap 'rm -rf "$WORK"' EXIT
@@ -45,8 +46,6 @@ if [ ! -x "$CHROME" ]; then
   echo "  Install Google Chrome, or use: pandoc --pdf-engine=xelatex (needs LaTeX)"
   exit 1
 fi
-
-mkdir -p "$OUT_DIR"
 
 # --- html -> pdf -------------------------------------------------------------
 render() {
@@ -120,97 +119,138 @@ title_for() {
   esac
 }
 
-# --- collect sources ---------------------------------------------------------
-# Ordered so the combined book reads front to back: overview, spec, then the
-# modules in sequence with each homework following its lesson.
-sources=()
-[ -f "$REPO_ROOT/README.md" ] && sources+=("README.md")
-[ -f "$REPO_ROOT/SPEC.md" ] && sources+=("SPEC.md")
-for dir in "$REPO_ROOT"/modules/*/; do
-  id="$(basename "$dir")"
-  [ -f "$dir/README.md" ] && sources+=("modules/$id/README.md")
-  [ -f "$dir/homework/README.md" ] && sources+=("modules/$id/homework/README.md")
-done
-[ -f "$REPO_ROOT/tasks/plan.md" ] && sources+=("tasks/plan.md")
-[ -f "$REPO_ROOT/tasks/todo.md" ] && sources+=("tasks/todo.md")
-
-echo "Rendering ${#sources[@]} Markdown files to PDF"
-echo
+# --- language configuration ---------------------------------------------------
+# Each language is a (source prefix, output directory, book title) triple. The
+# Turkish translation mirrors the English structure under tr/, so the same
+# traversal serves both.
+langs=()
+case "${1:-}" in
+  --en)   langs=("en") ;;
+  --tr)   langs=("tr") ;;
+  --book) langs=("en" "tr") ;;
+  *)      langs=("en" "tr") ;;
+esac
 
 book_only=false
 [ "${1:-}" = "--book" ] && book_only=true
 
-# --- per-file PDFs -----------------------------------------------------------
 made=0
 failed=0
 
-if [ "$book_only" = false ]; then
-  for rel in "${sources[@]}"; do
-    name="$(output_name "$rel")"
-    title="$(title_for "$rel")"
-    html="$WORK/$name.html"
-    pdf="$OUT_DIR/$name.pdf"
+for lang in "${langs[@]}"; do
 
-    # pagetitle, not title. Setting `title` makes pandoc render a heading
-    # block above the content, and every one of these files already opens with
-    # its own H1, so that produced the title twice. pagetitle sets only the
-    # document's <title>, which becomes the PDF's metadata title.
-    pandoc "$REPO_ROOT/$rel" \
-        --standalone \
-        --css="$CSS" \
-        --embed-resources \
-        --metadata pagetitle="$title" \
-        --from=gfm \
-        --to=html5 \
-        -o "$html" 2>/dev/null
-
-    if render "$html" "$pdf"; then
-      printf '  ok    %-42s %6s KB\n' "$name.pdf" "$(( $(wc -c < "$pdf") / 1024 ))"
-      made=$((made + 1))
-    else
-      printf '  FAIL  %s\n' "$name.pdf"
-      failed=$((failed + 1))
+  if [ "$lang" = "tr" ]; then
+    PREFIX="tr/"
+    OUT_DIR="$REPO_ROOT/pdf-tr"
+    BOOK_TITLE="Java 27, Java'ya Yeni Başlayan Programcılar İçin"
+    BOOK_FILE="Java-27-Mufredat.pdf"
+    if [ ! -d "$REPO_ROOT/tr" ]; then
+      echo "No tr/ directory; skipping Turkish."
+      continue
     fi
+  else
+    PREFIX=""
+    OUT_DIR="$REPO_ROOT/pdf"
+    BOOK_TITLE="Java 27 for Programmers New to Java"
+    BOOK_FILE="Java-27-Curriculum.pdf"
+  fi
+
+  mkdir -p "$OUT_DIR"
+
+  # --- collect sources --------------------------------------------------------
+  # Ordered so the combined book reads front to back: overview, spec, then the
+  # modules in sequence with each homework following its lesson.
+  sources=()
+  [ -f "$REPO_ROOT/${PREFIX}README.md" ] && sources+=("${PREFIX}README.md")
+  [ -f "$REPO_ROOT/${PREFIX}CEVIRI-NOTLARI.md" ] && sources+=("${PREFIX}CEVIRI-NOTLARI.md")
+  [ -f "$REPO_ROOT/${PREFIX}SPEC.md" ] && sources+=("${PREFIX}SPEC.md")
+  for dir in "$REPO_ROOT/${PREFIX}modules"/*/; do
+    [ -d "$dir" ] || continue
+    id="$(basename "$dir")"
+    [ -f "$dir/README.md" ] && sources+=("${PREFIX}modules/$id/README.md")
+    [ -f "$dir/homework/README.md" ] && sources+=("${PREFIX}modules/$id/homework/README.md")
   done
+  [ -f "$REPO_ROOT/${PREFIX}tasks/plan.md" ] && sources+=("${PREFIX}tasks/plan.md")
+  [ -f "$REPO_ROOT/${PREFIX}tasks/todo.md" ] && sources+=("${PREFIX}tasks/todo.md")
+
+  if [ ${#sources[@]} -eq 0 ]; then
+    echo "No Markdown found for '$lang'; skipping."
+    continue
+  fi
+
+  echo "[$lang] rendering ${#sources[@]} files to ${OUT_DIR#"$REPO_ROOT"/}/"
   echo
-fi
 
-# --- the combined book -------------------------------------------------------
-echo "Building the combined book"
+  # --- per-file PDFs ----------------------------------------------------------
+  if [ "$book_only" = false ]; then
+    for rel in "${sources[@]}"; do
+      bare="${rel#"$PREFIX"}"
+      name="$(output_name "$bare")"
+      title="$(title_for "$bare")"
+      html="$WORK/$lang-$name.html"
+      pdf="$OUT_DIR/$name.pdf"
 
-book_md="$WORK/book.md"
-: > "$book_md"
+      # pagetitle, not title. Setting `title` makes pandoc render a heading
+      # block above the content, and every one of these files already opens with
+      # its own H1, so that produced the title twice. pagetitle sets only the
+      # document's <title>, which becomes the PDF's metadata title.
+      pandoc "$REPO_ROOT/$rel" \
+          --standalone \
+          --css="$CSS" \
+          --embed-resources \
+          --metadata pagetitle="$title" \
+          --from=gfm \
+          --to=html5 \
+          -o "$html" 2>/dev/null
 
-for rel in "${sources[@]}"; do
-  # A rule before each document makes the page break land cleanly.
-  printf '\n\n<div class="page-break"></div>\n\n' >> "$book_md"
-  cat "$REPO_ROOT/$rel" >> "$book_md"
-  printf '\n' >> "$book_md"
+      if render "$html" "$pdf"; then
+        printf '  ok    %-42s %6s KB\n' "$name.pdf" "$(( $(wc -c < "$pdf") / 1024 ))"
+        made=$((made + 1))
+      else
+        printf '  FAIL  %s\n' "$name.pdf"
+        failed=$((failed + 1))
+      fi
+    done
+    echo
+  fi
+
+  # --- the combined book ------------------------------------------------------
+  book_md="$WORK/$lang-book.md"
+  : > "$book_md"
+
+  for rel in "${sources[@]}"; do
+    # A page break before each document makes each one start cleanly.
+    printf '\n\n<div class="page-break"></div>\n\n' >> "$book_md"
+    cat "$REPO_ROOT/$rel" >> "$book_md"
+    printf '\n' >> "$book_md"
+  done
+
+  pandoc "$book_md" \
+      --standalone \
+      --css="$CSS" \
+      --embed-resources \
+      --metadata title="$BOOK_TITLE" \
+      --toc --toc-depth=2 \
+      --from=gfm \
+      --to=html5 \
+      -o "$WORK/$lang-book.html" 2>/dev/null
+
+  if render "$WORK/$lang-book.html" "$OUT_DIR/$BOOK_FILE"; then
+    printf '  ok    %-42s %6s KB\n' "$BOOK_FILE" \
+        "$(( $(wc -c < "$OUT_DIR/$BOOK_FILE") / 1024 ))"
+    made=$((made + 1))
+  else
+    printf '  FAIL  %s\n' "$BOOK_FILE"
+    failed=$((failed + 1))
+  fi
+  echo
+
 done
-
-pandoc "$book_md" \
-    --standalone \
-    --css="$CSS" \
-    --embed-resources \
-    --metadata title="Java 27 for Programmers New to Java" \
-    --toc --toc-depth=2 \
-    --from=gfm \
-    --to=html5 \
-    -o "$WORK/book.html" 2>/dev/null
-
-if render "$WORK/book.html" "$OUT_DIR/Java-27-Curriculum.pdf"; then
-  printf '  ok    %-42s %6s KB\n' "Java-27-Curriculum.pdf" \
-      "$(( $(wc -c < "$OUT_DIR/Java-27-Curriculum.pdf") / 1024 ))"
-  made=$((made + 1))
-else
-  printf '  FAIL  Java-27-Curriculum.pdf\n'
-  failed=$((failed + 1))
-fi
 
 # --- summary -----------------------------------------------------------------
 echo
 if [ $failed -eq 0 ]; then
-  echo "Done. $made PDF(s) in ${OUT_DIR#"$REPO_ROOT"/}/"
+  echo "Done. $made PDF(s) built."
   exit 0
 fi
 

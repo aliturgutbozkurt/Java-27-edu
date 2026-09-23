@@ -16,3 +16,4 @@
 
 # Generated PDFs. Rebuild with ./scripts/build-pdfs.sh
 pdf/
+pdf-tr/
