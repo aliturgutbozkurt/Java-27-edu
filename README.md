@@ -181,6 +181,30 @@ Current state of this repository:
 
 ---
 
+## PDFs
+
+Every lesson and homework is also available as a PDF, plus the whole curriculum
+as a single 209-page book.
+
+```bash
+./scripts/build-pdfs.sh          # all 49 PDFs
+./scripts/build-pdfs.sh --book   # just the combined book
+```
+
+| Output | What |
+|---|---|
+| `pdf/Java-27-Curriculum.pdf` | the complete book, with a table of contents |
+| `pdf/NN-<module>.pdf` | one lesson |
+| `pdf/NN-<module>-homework.pdf` | one homework |
+| `pdf/00-overview.pdf`, `00-spec.pdf`, `00-plan.pdf`, `00-tasks.pdf` | this file and the project documents |
+
+The script needs [pandoc](https://pandoc.org/) and a Chromium-based browser.
+Chrome is used as the PDF engine because pandoc's default requires a LaTeX
+installation, and Chrome renders these tables and code blocks correctly without
+one. Rebuild after editing any Markdown; the whole set takes about a minute.
+
+---
+
 ## Project documents
 
 - [SPEC.md](SPEC.md) — what this project set out to build, and its success criteria

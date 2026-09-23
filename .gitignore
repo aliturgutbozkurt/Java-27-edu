@@ -13,3 +13,6 @@
 
 # Claude Code session-local state, not project config
 .claude/scheduled_tasks.lock
+
+# Generated PDFs. Rebuild with ./scripts/build-pdfs.sh
+pdf/
