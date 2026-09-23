@@ -140,7 +140,7 @@ Each task maps to one GitHub issue.
 
 ## integration
 
-- [ ] **T24 — Root README and final verification pass** · [#24](https://github.com/aliturgutbozkurt/Java-27-edu/issues/24)
+- [x] **T24 — Root README and final verification pass** · [#24](https://github.com/aliturgutbozkurt/Java-27-edu/issues/24)
   - Acceptance: Root `README.md` links all 22 modules in order with a one-line description each, documents JDK 27 setup per platform, and explains how to use the solutions tree. All eight spec success criteria checked off explicitly.
   - Verify: `./scripts/verify-examples.sh` exits 0 across the whole repository; every module folder confirmed to contain README, examples, and homework; no non-English content found; no third-party dependency anywhere.
   - Files: `README.md`, `SPEC.md` (success criteria checklist)

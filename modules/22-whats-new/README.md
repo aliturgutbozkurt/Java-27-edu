@@ -16,6 +16,24 @@ subject of this module, because everything else in it will go out of date.
 - How to read a JEP, and what the preview round number tells you
 - Structured concurrency and primitive patterns, run behind `--enable-preview`
 
+## Coming From Another Language
+
+| | Python | Node.js | Java |
+|---|---|---|---|
+| Release cadence | ~annual | ~biannual major | every six months, fixed date |
+| Long-term support | ~5 years per minor | even-numbered majors, 30 months | LTS every two years |
+| Trying unfinished features | `from __future__ import` | flags, or a release channel | `--enable-preview` |
+| Where the spec lives | PEPs | TC39 proposals | JEPs |
+
+The closest analogue is TC39's staged proposals. A Java preview is roughly a
+stage 3 proposal: specified, implemented, shipped behind a flag, and still able
+to change before it lands.
+
+The difference worth knowing: a Python `__future__` import is forward
+compatible, while a Java **preview class file is rejected outright** by a
+different release, even with the flag. That single fact decides most of what
+this module recommends.
+
 ## The Lesson
 
 ### What actually shipped

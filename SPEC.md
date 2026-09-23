@@ -1,6 +1,6 @@
 # Spec: Java 27 Learning Curriculum
 
-**Status:** Draft — awaiting human approval
+**Status:** Delivered — all 24 tasks complete, verified 2026-09-23
 **Date:** 2026-09-23
 **Phase:** 1 (Specify) of Specify → Plan → Tasks → Implement
 
@@ -248,19 +248,85 @@ There is no application to unit-test here; the deliverable is teaching material.
 
 ## Success Criteria
 
-1. `./scripts/verify-examples.sh` exits zero across the whole repository.
-2. All 22 module folders exist, each containing `README.md`, `examples/` with at least two runnable files, and `homework/README.md`.
-3. Every module README contains all seven template sections, including Key Takeaways.
-4. Every homework has a matching reference solution under `solutions/<module-id>/` that runs clean.
-5. Root `README.md` links every module in order and documents JDK 27 setup.
-6. No file contains non-English prose, identifiers, or comments.
-7. No third-party dependency appears anywhere in the repository.
-8. Every factual claim about a JDK version traces to openjdk.org release data.
+All eight checked on 2026-09-23 against the delivered repository. Each line
+records how it was verified, not merely that it was.
+
+- [x] **1. `./scripts/verify-examples.sh` exits zero across the whole repository.**
+      130 files, all behaving as declared, in about 70 seconds.
+
+- [x] **2. All 22 module folders exist, each containing `README.md`, `examples/`
+      with at least two runnable files, and `homework/README.md`.**
+      Checked by script across every module directory. 105 example files total,
+      minimum 4 per module.
+
+- [x] **3. Every module README contains all seven template sections, including
+      Key Takeaways.**
+      Checked by grepping each heading in all 22 files. One gap was found during
+      the final pass, in `22-whats-new`, and fixed.
+
+- [x] **4. Every homework has a matching reference solution under
+      `solutions/<module-id>/` that runs clean.**
+      22 solution directories for 22 modules, 25 solution files, all included in
+      the verification run above.
+
+- [x] **5. Root `README.md` links every module in order and documents JDK 27
+      setup.**
+      All 22 links confirmed present by script. Setup documented for macOS,
+      Linux and Windows, with `JAVA_HOME` instructions for each.
+
+- [x] **6. No file contains non-English prose, identifiers, or comments.**
+      Checked by scanning every `.java`, `.md` and `.sh` file for non-ASCII
+      letter characters. None found.
+
+- [x] **7. No third-party dependency appears anywhere in the repository.**
+      No `pom.xml`, `build.gradle` or `.jar` exists. Every import across all 130
+      files resolves to `java.*`, `javax.*` or `jdk.*`, plus the JEP 511
+      `import module java.base` declaration, which is a language feature rather
+      than a dependency.
+
+- [x] **8. Every factual claim about a JDK version traces to openjdk.org
+      release data.**
+      32 distinct openjdk.org links across the module and root READMEs. The
+      JDK 26 and 27 JEP tables, the JDK 25 finalisation claims, and JEP 491's
+      removal of virtual thread pinning were each fetched from the source during
+      writing rather than recalled.
+
+## Open Questions, as resolved
+
+1. **JDK 27 installation.** Resolved. JDK 27 (build 27+35-2325) was installed
+   before implementation began, and every example has been verified against it.
+
+2. **Module 21 and JUnit.** Resolved in favour of the zero-dependency rule.
+   Testing is taught with bare `assert` plus a 39-line hand-rolled harness, and
+   the module makes the case for adopting JUnit on any real project. The
+   constraint turned out to improve the lesson: seeing a whole working harness
+   explains what a framework does better than using one.
+
+3. **Preview features.** Resolved as proposed. Structured concurrency (JEP 533)
+   and primitive type patterns (JEP 532) appear only in Module 22, labelled with
+   their JEP number and preview round, and run behind `--enable-preview`. The
+   module argues explicitly against shipping preview features, since a preview
+   class file is rejected by a different release even with the flag.
 
 ---
 
-## Open Questions
+## Corrections Made During Implementation
 
-1. **JDK 27 is not installed on this machine.** The highest local JDK is 24.0.1, and `/usr/libexec/java_home -V` lists nothing above it. Verification of examples is blocked until JDK 27 is installed. Which distribution do you want — Temurin, Oracle OpenJDK, Corretto, or SDKMAN-managed? I can also write the curriculum first and verify afterwards, but then nothing is proven to run until the install happens.
-2. **Module 21 and JUnit.** The zero-dependency rule means testing gets taught with bare `assert` plus a small hand-rolled harness. That is honest but not what the learner will meet at work. Acceptable, or do you want JUnit as the single allowed exception to the no-dependency rule?
-3. **Preview features.** Structured concurrency, primitive patterns, and lazy constants are still preview in 27 and may change before they finalize. Plan is to cover them only in Module 22, clearly labeled, behind `--enable-preview`. Confirm that is the right call versus leaving them out entirely.
+Recorded because the spec's boundary forbade inventing claims, and holding to
+that surfaced several that were wrong:
+
+- A composition example asserted that subclassing `ArrayList` would double-count
+  additions. Running it disproved that: modern `ArrayList.addAll` copies in bulk.
+  `HashSet` is the collection that exhibits the bug, and the example now shows
+  both, which makes the fragile-base-class point better than the original would
+  have.
+- Three quoted compiler-error line numbers were wrong. All were corrected by
+  producing the errors.
+- A bucket-index demonstration used 8 buckets, and `Integer.MIN_VALUE` is
+  divisible by 8, so both the broken and correct forms returned `0` and the bug
+  was invisible. Changed to 7.
+- A homework's stated output disagreed with what its reference solution printed.
+  Homework outputs are now diffed against solution output rather than eyeballed.
+- The structured concurrency preview history was written from recollection as
+  seven rounds. Reading JEP 533's History section showed two earlier incubator
+  rounds, making it nine releases.
